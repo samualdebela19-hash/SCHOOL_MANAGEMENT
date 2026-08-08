@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Property Dashboard{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Property Dashboard</h2>
+    <div>
+        <a href="{{ url_for('add_inventory') }}" class="btn btn-outline-primary">Add Item</a>
+        <a href="{{ url_for('issue_loan') }}" class="btn btn-primary">Issue Item</a>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card stat-card" style="border-left-color: #3b82f6;">
+            <div class="card-body">
+                <h6 class="text-muted">Total Items</h6>
+                <h2>{{ total_items }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card" style="border-left-color: #10b981;">
+            <div class="card-body">
+                <h6 class="text-muted">Total Quantity</h6>
+                <h2>{{ total_qty }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card" style="border-left-color: #f59e0b;">
+            <div class="card-body">
+                <h6 class="text-muted">Currently Borrowed</h6>
+                <h2>{{ borrowed }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card" style="border-left-color: #8b5cf6;">
+            <div class="card-body">
+                <h6 class="text-muted">Returned</h6>
+                <h2>{{ returned }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex gap-2">
+    <a href="{{ url_for('inventory_list') }}" class="btn btn-outline-secondary">View Inventory</a>
+    <a href="{{ url_for('loan_list') }}" class="btn btn-outline-secondary">View Loans</a>
+</div>
+{% endblock %}

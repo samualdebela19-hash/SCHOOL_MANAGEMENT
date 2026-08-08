@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Issue Item{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Issue Item to Student</h2>
+
+<div class="card">
+    <div class="card-body">
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.student_id.label(class="form-label") }}
+                {{ form.student_id(class="form-select") }}
+            </div>
+            <div class="mb-3">
+                {{ form.item_id.label(class="form-label") }}
+                {{ form.item_id(class="form-select") }}
+            </div>
+            <div class="mb-3">
+                {{ form.borrowed_date.label(class="form-label") }}
+                {{ form.borrowed_date(class="form-control") }}
+            </div>
+            {{ form.submit(class="btn btn-primary") }}
+            <a href="{{ url_for('loan_list') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

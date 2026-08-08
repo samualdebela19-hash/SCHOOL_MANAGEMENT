@@ -1,1 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Return Item{% endblock %}
 
+{% block content %}
+<h2 class="mb-4">Mark Item as Returned</h2>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <p><strong>Student:</strong> {{ loan.student.full_name if loan.student else '-' }}</p>
+        <p><strong>Item:</strong> {{ loan.item.item_name if loan.item else '-' }}</p>
+        <p><strong>Borrowed Date:</strong> {{ loan.borrowed_date }}</p>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.return_date.label(class="form-label") }}
+                {{ form.return_date(class="form-control") }}
+            </div>
+            {{ form.submit(class="btn btn-success") }}
+            <a href="{{ url_for('loan_list') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
