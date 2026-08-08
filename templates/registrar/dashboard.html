@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Registrar Dashboard{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Registrar Dashboard</h2>
+    <a href="{{ url_for('add_student') }}" class="btn btn-primary">
+        <i class="bi bi-person-plus"></i> Add New Student
+    </a>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="card stat-card" style="border-left-color: #3b82f6;">
+            <div class="card-body">
+                <h6 class="text-muted">Total Students</h6>
+                <h2>{{ total }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">Recent Students</div>
+    <div class="card-body">
+        {% if students %}
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Full Name</th>
+                    <th>Grade</th>
+                    <th>Section</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in students %}
+                <tr>
+                    <td>{{ s.student_id }}</td>
+                    <td>{{ s.full_name }}</td>
+                    <td>{{ s.grade or '-' }}</td>
+                    <td>{{ s.section or '-' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ url_for('student_list') }}" class="btn btn-sm btn-outline-primary">View All Students</a>
+        {% else %}
+        <p class="text-muted">No students registered yet.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

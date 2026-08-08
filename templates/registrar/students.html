@@ -1,1 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Students List{% endblock %}
 
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>All Students</h2>
+    <a href="{{ url_for('add_student') }}" class="btn btn-primary">
+        <i class="bi bi-person-plus"></i> Add Student
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        {% if students %}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Full Name</th>
+                        <th>Grade</th>
+                        <th>Section</th>
+                        <th>Gender</th>
+                        <th>Phone</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in students %}
+                    <tr>
+                        <td>{{ s.student_id }}</td>
+                        <td>{{ s.full_name }}</td>
+                        <td>{{ s.grade or '-' }}</td>
+                        <td>{{ s.section or '-' }}</td>
+                        <td>{{ s.gender or '-' }}</td>
+                        <td>{{ s.phone or '-' }}</td>
+                        <td>
+                            <a href="{{ url_for('edit_student', id=s.id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+                            <form action="{{ url_for('delete_student', id=s.id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure?')">
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="text-muted">No students found. <a href="{{ url_for('add_student') }}">Add the first student</a></p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
