@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Admin Dashboard</h2>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card stat-card" style="border-left-color: #3b82f6;">
+            <div class="card-body">
+                <h6 class="text-muted">Total Students</h6>
+                <h2>{{ total_students }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card" style="border-left-color: #10b981;">
+            <div class="card-body">
+                <h6 class="text-muted">Total Users</h6>
+                <h2>{{ total_users }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card" style="border-left-color: #f59e0b;">
+            <div class="card-body">
+                <h6 class="text-muted">Inventory Items</h6>
+                <h2>{{ total_items }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card" style="border-left-color: #ef4444;">
+            <div class="card-body">
+                <h6 class="text-muted">Items Borrowed</h6>
+                <h2>{{ borrowed }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h5>Quick Links</h5>
+        <div class="d-flex gap-2 flex-wrap">
+            <a href="{{ url_for('admin_users') }}" class="btn btn-outline-primary">Manage Users</a>
+            <a href="{{ url_for('student_list') }}" class="btn btn-outline-success">View Students</a>
+            <a href="{{ url_for('attendance_list') }}" class="btn btn-outline-info">Attendance Records</a>
+            <a href="{{ url_for('inventory_list') }}" class="btn btn-outline-warning">Inventory</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
