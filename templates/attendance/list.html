@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Attendance List{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Attendance Records</h2>
+    <a href="{{ url_for('mark_attendance') }}" class="btn btn-primary">Mark New</a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        {% if records %}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Student ID</th>
+                        <th>Student Name</th>
+                        <th>Status</th>
+                        <th>Recorded By</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in records %}
+                    <tr>
+                        <td>{{ r.date }}</td>
+                        <td>{{ r.student.student_id if r.student else '-' }}</td>
+                        <td>{{ r.student.full_name if r.student else '-' }}</td>
+                        <td>
+                            {% if r.status == 'Present' %}
+                                <span class="badge bg-success">Present</span>
+                            {% elif r.status == 'Absent' %}
+                                <span class="badge bg-danger">Absent</span>
+                            {% else %}
+                                <span class="badge bg-warning text-dark">Late</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ r.recorder.username if r.recorder else '-' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="text-muted">No attendance records yet.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
